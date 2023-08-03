@@ -1,8 +1,8 @@
 const express = require('express');
-const connectDb = require('./Db/Dbconfig');
 const cors = require('cors')
 const taskRoute = require("./routes/task")
 const userRoute = require("./routes/user")
+const mongoose  = require("mongoose")
 require('dotenv').config();
 
 const app = express();
@@ -12,16 +12,21 @@ app.use(cors({
 
 app.use(express.json());
 
-connectDb()
+
 
 
 app.use("/",taskRoute)
 app.use('/auth',userRoute)
 
 
-app.listen(process.env.PORT || 6010,()=>{
-    console.log(`server running on ${process.env.PORT}`);
-})
+mongoose.connect(process.env.MONGO_URL).then(()=>{
+    console.log("mongodb connected");
+    app.listen(process.env.PORT || 6010,()=>{
+        console.log(`server running on ${process.env.PORT}`);
+    })
+    
+}).catch((err)=>{console.log(err)})
+
 
 
 
