@@ -6,9 +6,7 @@ const mongoose  = require("mongoose")
 require('dotenv').config();
 
 const app = express();
-app.use(cors({
-    origin: "https://taskmanagementfrontend.netlify.app/"
- }));
+app.use(cors());
 
 app.use(express.json());
 
