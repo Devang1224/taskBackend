@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-    origin: "http://localhost:3001"
+    origin: "https://taskmanagementfrontend.netlify.app/"
  }));
 
 app.use(express.json());
